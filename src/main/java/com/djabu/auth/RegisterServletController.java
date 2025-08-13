@@ -1,4 +1,4 @@
-package com.djabu.controller;
+package com.djabu.auth;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

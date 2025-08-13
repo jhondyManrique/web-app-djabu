@@ -57,8 +57,11 @@
         <table>
           <thead>
             <tr>
-              <th>Product</th>
-              <th>Price</th>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>+</th>
+
             </tr>
           </thead>
           <tbody>
@@ -66,6 +69,11 @@
                 <tr>
                     <td><c:out value="${product.productName}" /></td>
                     <td><c:out value="${product.unitPrice}" /></td>
+                    <td><input type="number" value="1" min="1" class="cantidad-input" style="width: 60px;"></td>
+                    <td><button type="button" class="btn-agregar"
+                    data-nombre="${product.productName}"
+                    data-precio="${product.unitPrice}">
+                    agregar al carrito</button></td>
                 </tr>
             </c:forEach>
 
@@ -80,7 +88,42 @@
         </table>
         <footer><h3>&copy copyright</h3></footer>
       </div>
+       <div class="carrito-compras">
+                  <h2 class="carrito">Carrito de Venta</h2>
+                  <form action="${pageContext.request.contextPath}/ProcesarVentaServlet" method="post">
+                      <div class="tabla-carrito-container">
+                          <table class="tabla-carrito">
+                              <thead>
+                                  <tr>
+                                      <th>Producto</th>
+                                      <th>Cantidad</th>
+                                      <th>Precio</th>
+                                      <th>Subtotal</th>
+                                      <th>Acción</th>
+                                  </tr>
+                              </thead>
+                              <tbody id="cart-items">
+                                  <%-- El JavaScript llenará esta tabla dinámicamente --%>
+                                  <tr><td colspan="5">El carrito está vacío</td></tr>
+                              </tbody>
+                          </table>
+                      </div>
+
+                      <div class="carrito-total">
+                          <h3>Total: $<span id="cart-total">0.00</span></h3>
+                      </div>
+
+                      <%-- Este div contendrá los inputs ocultos para enviar al servlet final --%>
+                      <div id="hidden-form-inputs"></div>
+
+                      <button type="submit" class="btn-guardar-venta">Guardar Venta</button>
+                  </form>
+              </div>
     </div>
     <script src="${pageContext.request.contextPath}/js/index.js"></script>
+    <script src="${pageContext.request.contextPath}/js/carrito.js"></script>
+
+
+
   </body>
 </html>
