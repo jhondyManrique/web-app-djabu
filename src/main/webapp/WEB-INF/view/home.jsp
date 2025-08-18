@@ -90,7 +90,7 @@
       </div>
        <div class="carrito-compras">
                   <h2 class="carrito">Carrito de Venta</h2>
-                  <form action="${pageContext.request.contextPath}/ProcesarVentaServlet" method="post">
+                  <form action="" method="post">
                       <div class="tabla-carrito-container">
                           <table class="tabla-carrito">
                               <thead>
@@ -120,6 +120,10 @@
                   </form>
               </div>
     </div>
+    <script src="${pageContext.request.contextPath}/js/actualizarVistaCarrito.js"></script>
+    <script src="${pageContext.request.contextPath}/js/agregarAlCarrito.js"></script>
+    <script src="${pageContext.request.contextPath}/js/eliminarDelCarrito.js"></script>
+    <script>const carritoInicial = ${carritoInicial};</script>
     <script src="${pageContext.request.contextPath}/js/index.js"></script>
     <script src="${pageContext.request.contextPath}/js/carrito.js"></script>
 

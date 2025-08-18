@@ -1,6 +1,8 @@
 package com.djabu.controller;
 
 import com.djabu.model.VentaItemModel;
+import com.djabu.service.CarritoService;
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,6 +25,8 @@ public class CarritoServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
+        CarritoService carritoService = new CarritoService();
+
 
         // Obtenemos el carrito de la sesión. Usamos el nombre del producto como clave (String).
         Map<String, VentaItemModel> carrito = (Map<String, VentaItemModel>) session.getAttribute("carrito");
@@ -42,52 +46,22 @@ public class CarritoServlet extends HttpServlet {
                 itemExistente.cantidad += cantidad;
             } else {
                 // Si es un producto nuevo, lo agregamos al carrito
-                carrito.put(nombre, new VentaItemModel(nombre, precio, cantidad));
+                carrito.put(nombre, new VentaItemModel(nombre, cantidad, precio));
             }
-
         } else if ("eliminar".equals(action)) {
             String nombre = request.getParameter("nombre");
             carrito.remove(nombre);
         }
-
         // Guardamos el carrito actualizado de vuelta en la sesión
         session.setAttribute("carrito", carrito);
-
-        // --- RESPUESTA JSON PARA EL JAVASCRIPT ---
-
-        // Construimos el string JSON manualmente con un StringBuilder
-        StringBuilder jsonResponse = new StringBuilder();
-        jsonResponse.append("{");
-        jsonResponse.append("\"total\": ").append(calcularTotal(carrito)).append(",");
-        jsonResponse.append("\"items\": [");
-
-        boolean primero = true;
-        for (VentaItemModel item : carrito.values()) {
-            if (!primero) {
-                jsonResponse.append(",");
-            }
-            jsonResponse.append("{");
-            // Escapamos las comillas dobles en el nombre por si acaso
-            jsonResponse.append("\"nombre\": \"").append(item.nombre.replace("\"", "\\\"")).append("\",");
-            jsonResponse.append("\"precio\": ").append(item.precio).append(",");
-            jsonResponse.append("\"cantidad\": ").append(item.cantidad);
-            jsonResponse.append("}");
-            primero = false;
-        }
-
-        jsonResponse.append("]");
-        jsonResponse.append("}");
-
+        Map<String,Object> respuesta = new HashMap<>();
+        respuesta.put("items", carrito.values());
+        respuesta.put("total", carritoService.calcularTotal(carrito));
+        String jsonResponse = new Gson().toJson(respuesta);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(jsonResponse.toString());
-    }
 
-    private double calcularTotal(Map<String, VentaItemModel> carrito) {
-        double total = 0;
-        for (VentaItemModel item : carrito.values()) {
-            total += item.precio * item.cantidad;
-        }
-        return total;
+        //Escribimos el string JSON en la respuesta.
+        response.getWriter().write(jsonResponse);
     }
 }

@@ -29,15 +29,13 @@ public class ProductServletController extends HttpServlet {
             System.out.println("error al convertir el string a bigdecimal");
             request.setAttribute("errorMessage", "error en la validacion");
             request.getRequestDispatcher("/WEB-INF/view/addProduct.jsp").forward(request, response);
-            return;
-
         }
 
         if (unitPrice == null){
             System.out.println("el precio no puede estar vacio");
             request.setAttribute("errorMessage", "error en la validacion");
             request.getRequestDispatcher("/WEB-INF/view/addProduct.jsp").forward(request, response);
-            return;
+
         }
 
         ProductModel product = new ProductModel(productName,unitPrice);
@@ -52,6 +50,5 @@ public class ProductServletController extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
