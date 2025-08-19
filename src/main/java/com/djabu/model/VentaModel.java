@@ -1,6 +1,6 @@
 package com.djabu.model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class VentaModel {

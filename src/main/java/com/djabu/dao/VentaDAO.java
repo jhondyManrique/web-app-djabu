@@ -4,7 +4,9 @@ import com.djabu.model.VentaItemModel;
 import com.djabu.model.VentaModel;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
+import com.djabu.dao.Conexion;
 
 import static com.djabu.dao.Conexion.getConexion;
 
@@ -37,5 +39,46 @@ public class VentaDAO {
             }
         }
         return true;
+    }
+
+    public List<VentaModel> obtenerVentas(){
+        List<VentaModel> ventas = new ArrayList<>();
+        String sql = "SELECT * from ventas";
+        try(Connection conn = getConexion();
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();){
+            while (rs.next()){
+                int id = rs.getInt("id_venta");
+                Timestamp fecha = rs.getTimestamp("fecha_venta");
+                Double total = rs.getDouble("total_venta");
+                VentaModel venta = new VentaModel();
+                venta.setId(id);
+                venta.setFecha(fecha);
+                venta.setTotal(total);
+                ventas.add(venta);
+            }
+            return ventas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<VentaItemModel> obtenerDetallesPorId(int id){
+        String sql = "SELECT * from detalle_ventas WHERE id_venta = ?";
+        List<VentaItemModel> detalles = new ArrayList<>();
+        try(Connection conn = getConexion();
+            PreparedStatement pstm = conn.prepareStatement(sql);){
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()){
+                String nombre = rs.getString("nombre");
+                int cantidad = rs.getInt("cantidad");
+                Double precio =rs.getDouble("precio");
+                detalles.add(new VentaItemModel(nombre,cantidad,precio));
+            }
+            return detalles;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
