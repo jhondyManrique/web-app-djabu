@@ -53,73 +53,41 @@
         </nav>
       </div>
       <div class="container_table">
-        <h1 class="inv">INVENTARIO</h1>
+        <h1 class="inv">DETALLES</h1>
         <table>
           <thead>
             <tr>
-              <th>Producto</th>
-              <th>Precio</th>
-              <th>Cantidad</th>
-              <th>+</th>
-
+              <th>Nombre</th>
+              <th>cantidad</th>
+              <th>precio</th>
+              <th>subtotal</th>
             </tr>
           </thead>
           <tbody>
-            <c:forEach var="product" items="${products}">
+            <c:forEach var="detalle" items="${detalles}">
                 <tr>
-                    <td><c:out value="${product.productName}" /></td>
-                    <td><c:out value="${product.unitPrice}" /></td>
-                    <td><input type="number" value="1" min="1" class="cantidad-input" style="width: 60px;"></td>
-                    <td><button type="button" class="btn-agregar"
-                    data-nombre="${product.productName}"
-                    data-precio="${product.unitPrice}">
-                    agregar al carrito</button></td>
+                    <td><c:out value="${detalle.nombre}" /></td>
+                    <td><c:out value="${detalle.cantidad}" /></td>
+                    <td><c:out value="${detalle.precio}" /></td>
+                    <td><c:out value="${detalle.cantidad * detalle.precio}" /></td>
                 </tr>
             </c:forEach>
 
-            <c:if test="${empty products}">
+            <c:if test="${empty detalles}">
                 <tr>
                     <td colspan="4" style="text-align:center; padding: 20px;">
-                        No hay productos en el inventario. ¡Añade el primero!
+                        esta venta esta vacia!!
                     </td>
                 </tr>
             </c:if>
           </tbody>
         </table>
+        <div class="carrito-total">
+            <h3>Total: $<span id="cart-total">${total}</span></h3>
+        </div>
         <footer><h3>&copy copyright</h3></footer>
       </div>
-       <div class="carrito-compras">
-                  <h2 class="carrito">Carrito de Venta</h2>
-                  <form action="/procesarVenta" method="post">
-                      <div class="tabla-carrito-container">
-                          <table class="tabla-carrito">
-                              <thead>
-                                  <tr>
-                                      <th>Producto</th>
-                                      <th>Cantidad</th>
-                                      <th>Precio</th>
-                                      <th>Subtotal</th>
-                                      <th>Acción</th>
-                                  </tr>
-                              </thead>
-                              <tbody id="cart-items">
-                                  <%-- El JavaScript llenará esta tabla dinámicamente --%>
-                                  <tr><td colspan="5">El carrito está vacío</td></tr>
-                              </tbody>
-                          </table>
-                      </div>
 
-                      <div class="carrito-total">
-                          <h3>Total: $<span id="cart-total">0.00</span></h3>
-                      </div>
-
-                      <%-- Este div contendrá los inputs ocultos para enviar al servlet final --%>
-                      <div id="hidden-form-inputs"></div>
-
-                      <button type="submit" class="btn-guardar-venta">Guardar Venta</button>
-                  </form>
-              </div>
-    </div>
 
     <script src="${pageContext.request.contextPath}/js/actualizarVistaCarrito.js"></script>
     <script src="${pageContext.request.contextPath}/js/agregarAlCarrito.js"></script>

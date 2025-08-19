@@ -9,6 +9,7 @@ public class VentaItemModel {
     public int cantidad;
     private double precio;
 
+
     // Constructores, getters y setters
 
     public VentaItemModel() {}
@@ -29,4 +30,5 @@ public class VentaItemModel {
     public void setCantidad(int cantidad) { this.cantidad = cantidad; }
     public Double getPrecio() { return precio; }
     public void setPrecio(Double precio) { this.precio = precio; }
+
 }
