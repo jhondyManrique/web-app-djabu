@@ -10,7 +10,7 @@ import static com.djabu.dao.Conexion.getConexion;
 
 public class VentaDAO {
 
-    public boolean guardarVenta(VentaModel venta) throws SQLException {
+    public static boolean guardarVenta(VentaModel venta) throws SQLException {
         String sqlVenta = "INSERT INTO ventas (total_venta) VALUES (?)";
         String sqlDetalle = "INSERT INTO detalle_ventas (id_venta, nombre, cantidad, precio) VALUES (?, ?, ?, ?)";
         List<VentaItemModel> detalles = venta.getDetalles();
@@ -33,6 +33,7 @@ public class VentaDAO {
                 psDetalle.setString(2, item.getNombre());
                 psDetalle.setInt(3, item.getCantidad());
                 psDetalle.setDouble(4, item.getPrecio());
+                psDetalle.executeUpdate();
             }
         }
         return true;

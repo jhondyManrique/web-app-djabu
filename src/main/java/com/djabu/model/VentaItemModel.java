@@ -1,5 +1,7 @@
 package com.djabu.model;
 
+import java.math.BigDecimal;
+
 public class VentaItemModel {
     private int id;
     private int idVenta;
@@ -11,10 +13,10 @@ public class VentaItemModel {
 
     public VentaItemModel() {}
 
-    public VentaItemModel(String nombreProducto, int cantidad, double precioUnitario) {
-        this.nombre = nombreProducto;
+    public VentaItemModel(String nombre, int cantidad, Double precio) {
+        this.nombre = nombre;
         this.cantidad = cantidad;
-        this.precio = precioUnitario;
+        this.precio = precio;
     }
 
     public int getId() { return id; }
@@ -25,6 +27,6 @@ public class VentaItemModel {
     public void setNombre(String nombre) { this.nombre = nombre; }
     public int getCantidad() { return cantidad; }
     public void setCantidad(int cantidad) { this.cantidad = cantidad; }
-    public double getPrecio() { return precio; }
-    public void setPrecio(double precio) { this.precio = precio; }
+    public Double getPrecio() { return precio; }
+    public void setPrecio(Double precio) { this.precio = precio; }
 }

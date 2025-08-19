@@ -25,7 +25,9 @@ public class HomeServletController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         CarritoService carritoService = new CarritoService();
-        Map<String, VentaItemModel> carrito = (Map<String, VentaItemModel>) session.getAttribute("carrito");if (carrito == null) {
+        Object confirm = session.getAttribute("confirmacion");
+        Map<String, VentaItemModel> carrito = (Map<String, VentaItemModel>) session.getAttribute("carrito");
+        if (carrito == null) {
             carrito = new HashMap<>();
         }
         Map<String, Object> respuesta = new HashMap<>();
@@ -34,7 +36,9 @@ public class HomeServletController extends HttpServlet {
         String jsonResponse = new Gson().toJson(respuesta);
         request.setAttribute("carritoInicial", jsonResponse);
 
-
+        if (confirm != null){
+            request.setAttribute("confirmacion",confirm);
+        }
         List<ProductModel> products = null;
         ProductDAO productDAO = new ProductDAO();
         products = productDAO.getProducts();

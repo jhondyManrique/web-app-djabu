@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 
 public class ProductModel {
     protected String productName;
-    protected BigDecimal unitPrice;
+    protected double unitPrice;
 
     public ProductModel() {
     }
 
-    public ProductModel(String productName, BigDecimal unitPrice) {
+    public ProductModel(String productName, Double unitPrice) {
         this.productName = productName;
         this.unitPrice = unitPrice;
     }
@@ -22,11 +22,11 @@ public class ProductModel {
         this.productName = productName;
     }
 
-    public BigDecimal getUnitPrice() {
+    public Double getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
+    public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
     }
 }

@@ -23,7 +23,7 @@ public class ProductDAO {
 
             while (rs.next()){
                 String productName = rs.getString("product_name");
-                BigDecimal unitPrice = rs.getBigDecimal("unit_price");
+                Double unitPrice = rs.getDouble("unit_price");
                 products.add(new ProductModel(productName,unitPrice));
             }
 
@@ -33,13 +33,33 @@ public class ProductDAO {
         return products;
     }
 
+    public ProductModel getProductByName(String name){
+        String sql = "SELECT * from products WHERE product_name = ?";
+        try(Connection conn = getConexion();
+            PreparedStatement pstm = conn.prepareStatement(sql);){
+
+            pstm.setString(1 , name);
+            ResultSet rs = pstm.executeQuery();
+
+            while (rs.next()){
+                String productName = rs.getString("product_name");
+                Double unitPrice = rs.getDouble("unit_price");
+                return new ProductModel(productName,unitPrice);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
+    }
+
     public int addProduct(ProductModel productModel) throws SQLException {
         int afectedRows = 0;
         String sql = "INSERT INTO products (product_name,unit_price) VALUES (?,?)";
         try(Connection conn = getConexion();
             PreparedStatement  pstm = conn.prepareStatement(sql)){
             pstm.setString(1,productModel.getProductName());
-            pstm.setBigDecimal(2,productModel.getUnitPrice());
+            pstm.setDouble(2,productModel.getUnitPrice());
             afectedRows = pstm.executeUpdate();
         }catch (SQLException e){
             throw new RuntimeException(e);

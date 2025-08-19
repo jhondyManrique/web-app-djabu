@@ -20,23 +20,15 @@ public class ProductServletController extends HttpServlet {
             throws ServletException, IOException {
         String productName = request.getParameter("productName");
         String unitPriceString = request.getParameter("unitPrice");
-        BigDecimal unitPrice=null;
-        try{
-            if (unitPriceString != null && !unitPriceString.trim().isEmpty()){
-                unitPrice = new BigDecimal(unitPriceString);
-            }
-        }catch (NumberFormatException e){
-            System.out.println("error al convertir el string a bigdecimal");
-            request.setAttribute("errorMessage", "error en la validacion");
-            request.getRequestDispatcher("/WEB-INF/view/addProduct.jsp").forward(request, response);
-        }
 
-        if (unitPrice == null){
+
+        if (unitPriceString == null){
             System.out.println("el precio no puede estar vacio");
             request.setAttribute("errorMessage", "error en la validacion");
             request.getRequestDispatcher("/WEB-INF/view/addProduct.jsp").forward(request, response);
 
         }
+        Double unitPrice = Double.parseDouble(unitPriceString);
 
         ProductModel product = new ProductModel(productName,unitPrice);
         ProductDAO productDAO = new ProductDAO();

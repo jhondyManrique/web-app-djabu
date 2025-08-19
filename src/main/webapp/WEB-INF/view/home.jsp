@@ -90,7 +90,7 @@
       </div>
        <div class="carrito-compras">
                   <h2 class="carrito">Carrito de Venta</h2>
-                  <form action="" method="post">
+                  <form action="/ventas" method="post">
                       <div class="tabla-carrito-container">
                           <table class="tabla-carrito">
                               <thead>
@@ -120,6 +120,7 @@
                   </form>
               </div>
     </div>
+
     <script src="${pageContext.request.contextPath}/js/actualizarVistaCarrito.js"></script>
     <script src="${pageContext.request.contextPath}/js/agregarAlCarrito.js"></script>
     <script src="${pageContext.request.contextPath}/js/eliminarDelCarrito.js"></script>

@@ -23,7 +23,7 @@ function actualizarVistaCarrito(data) {
             cartItemsTbody.innerHTML += row;
 
             // Creamos los inputs ocultos para el formulario final
-            const hiddenId = `<input type="hidden" name="productoId" value="${item.id}">`;
+            const hiddenId = `<input type="hidden" name="producto" value="${item.nombre}">`;
             const hiddenCantidad = `<input type="hidden" name="cantidad" value="${item.cantidad}">`;
             hiddenInputsDiv.innerHTML += hiddenId + hiddenCantidad;
         });

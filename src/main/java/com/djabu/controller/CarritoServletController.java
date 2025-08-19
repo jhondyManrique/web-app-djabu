@@ -17,7 +17,7 @@ import java.util.Map;
 
 
 @WebServlet("/carrito")
-public class CarritoServlet extends HttpServlet {
+public class CarritoServletController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
