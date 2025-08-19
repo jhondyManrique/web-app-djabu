@@ -1,0 +1,5 @@
+CREATE TABLE ventas (
+    id_venta SERIAL PRIMARY KEY,
+    fecha_venta TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    total_venta DECIMAL(10, 2) NOT NULL
+);

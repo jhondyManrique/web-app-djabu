@@ -1,6 +1,5 @@
-package com.djabu.controller;
+package com.djabu.auth;
 
-import com.djabu.dao.UserDAO;
 import com.djabu.model.UserModel;
 import com.djabu.service.UserService;
 import jakarta.servlet.ServletException;

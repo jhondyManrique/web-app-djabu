@@ -47,6 +47,21 @@ nav {
   border: none;
 }
 
+button {
+  margin-bottom: 7px;
+  border-radius: 20px;
+  background-color: #27ae60;
+  color: rgb(215, 215, 215);
+  text-decoration: none;
+  padding: 7px;
+  width: 10em;
+  border: none;
+}
+
+button:hover {
+  background-color: #13572f;
+}
+
 img.buscar {
   background-color: white;
   padding: 0 10px;
@@ -97,6 +112,10 @@ h1.inv {
   color: #d9d9d9;
 }
 
+
+
+
+
 @media (min-width: 720px) {
   .container {
     flex-direction: row;
@@ -135,6 +154,16 @@ h1.inv {
     color: #2c3e50;
     position: static;
     padding-bottom: 30px;
+  }
+
+  h2.carrito {
+    padding: 15px;
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  div.carrito-compras {
+    padding: 40px;
   }
 
   table {

@@ -5,7 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Product</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css?v=1" />
   </head>
   <body>
     <div class="container">
@@ -40,5 +39,7 @@
       </div>
     </div>
     <footer><h3>&copy copyright</h3></footer>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css?v=1" />
+
   </body>
 </html>

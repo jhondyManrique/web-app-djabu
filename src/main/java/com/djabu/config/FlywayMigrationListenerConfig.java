@@ -1,4 +1,4 @@
-package com.djabu.controller;
+package com.djabu.config;
 
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -7,7 +7,7 @@ import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
 
 @WebListener
-public class FlywayMigrationListener implements ServletContextListener {
+public class FlywayMigrationListenerConfig implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
