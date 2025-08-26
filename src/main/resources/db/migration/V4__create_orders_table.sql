@@ -1,0 +1,5 @@
+CREATE TABLE orders (
+    id_order SERIAL PRIMARY KEY,
+    order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    total_price_order DECIMAL(10, 2) NOT NULL
+);

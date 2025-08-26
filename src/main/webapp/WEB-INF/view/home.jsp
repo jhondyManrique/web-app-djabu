@@ -16,50 +16,48 @@
           <img src="${pageContext.request.contextPath}/assets/img/dbajulogo.jpg" alt="djabu logo" />
         </div>
         <nav>
-          <button class="menu_toggle">
-            <img src="${pageContext.request.contextPath}/assets/icons/menu.jpg" alt="" />
-          </button>
-          <div class="container_buscar">
-            <label for=""
-              ><img class="buscar" src="${pageContext.request.contextPath}/assets/icons/buscar.jpg" alt="icono buscar"
-            /></label>
-            <input type="text" />
-          </div>
-          <ul class="menu">
-            <li>
-              <a href="/home"><img src="${pageContext.request.contextPath}/assets/icons/inicio.jpg" alt="" />Inicio</a>
-            </li>
-            <li>
-              <a href=""><img src="${pageContext.request.contextPath}/assets/icons/perfil.jpg" alt="" />Perfil</a>
-            </li>
-            <li>
-              <a href=""><img src="${pageContext.request.contextPath}/assets/icons/clientes.jpg" alt="" />Clientes</a>
-            </li>
-            <li>
-              <a href=""><img src="${pageContext.request.contextPath}/assets/icons/empleados.jpg" alt="" />Empleados</a>
-            </li>
-            <li>
-              <a href="/addProduct"
-                ><img src="${pageContext.request.contextPath}/assets/icons/agregar.jpg" alt="" />Agregar Producto</a
-              >
-            </li>
-            <li>
-              <a href="/ventas/nueva"><img src="${pageContext.request.contextPath}/assets/icons/ventas.jpg" alt="" />Ventas</a>
-            </li>
-            <li>
-              <a href=""><img src="${pageContext.request.contextPath}/assets/icons/pedidos.jpg" alt="" />Pedidos</a>
-            </li>
-          </ul>
-        </nav>
+                          <button class="menu_toggle">
+                            <img src="${pageContext.request.contextPath}/assets/icons/menu.jpg" alt="" />
+                          </button>
+                          <div class="container_buscar">
+                            <label for=""
+                              ><img class="buscar" src="${pageContext.request.contextPath}/assets/icons/buscar.jpg" alt="icono buscar"
+                            /></label>
+                            <input type="text" />
+                          </div>
+                          <ul class="menu">
+                            <li>
+                              <a href="/home"><img src="${pageContext.request.contextPath}/assets/icons/inicio.jpg" alt="" />Home</a>
+                            </li>
+                            <li>
+                              <a href=""><img src="${pageContext.request.contextPath}/assets/icons/perfil.jpg" alt="" />Profile</a>
+                            </li>
+                            <li>
+                              <a href=""><img src="${pageContext.request.contextPath}/assets/icons/clientes.jpg" alt="" />Clients</a>
+                            </li>
+                            <li>
+                              <a href=""><img src="${pageContext.request.contextPath}/assets/icons/empleados.jpg" alt="" />Employees</a>
+                            </li>
+                            <li>
+                              <a href="/products/add"
+                                ><img src="${pageContext.request.contextPath}/assets/icons/agregar.jpg" alt="" />Add Product</a
+                              >
+                            </li>
+                            <li>
+                              <a href="/orders"><img src="${pageContext.request.contextPath}/assets/icons/ventas.jpg" alt="" />Orders</a>
+                            </li>
+
+                          </ul>
+                        </nav>
       </div>
       <div class="container_table">
-        <h1 class="inv">INVENTARIO</h1>
+        <h1 class="inv">INVENTORY</h1>
         <table>
           <thead>
             <tr>
-              <th>Producto</th>
-              <th>Precio</th>
-              <th>Cantidad</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
               <th>+</th>
 
             </tr>
@@ -67,20 +65,20 @@
           <tbody>
             <c:forEach var="product" items="${products}">
                 <tr>
-                    <td><c:out value="${product.productName}" /></td>
-                    <td><c:out value="${product.unitPrice}" /></td>
-                    <td><input type="number" value="1" min="1" class="cantidad-input" style="width: 60px;"></td>
-                    <td><button type="button" class="btn-agregar"
-                    data-nombre="${product.productName}"
-                    data-precio="${product.unitPrice}">
-                    agregar al carrito</button></td>
+                    <td><c:out value="${product.name}" /></td>
+                    <td><c:out value="${product.price}" /></td>
+                    <td><input type="number" value="1" min="1" class="quantityInput" style="width: 60px;"></td>
+                    <td><button type="button" class="btn-add-product"
+                    data-name="${product.name}"
+                    data-price="${product.price}">
+                    ADD TO CART</button></td>
                 </tr>
             </c:forEach>
 
             <c:if test="${empty products}">
                 <tr>
                     <td colspan="4" style="text-align:center; padding: 20px;">
-                        No hay productos en el inventario. ¡Añade el primero!
+                        There are no product yet, add the first one!!
                     </td>
                 </tr>
             </c:if>
@@ -89,22 +87,22 @@
         <footer><h3>&copy copyright</h3></footer>
       </div>
        <div class="carrito-compras">
-                  <h2 class="carrito">Carrito de Venta</h2>
-                  <form action="/procesarVenta" method="post">
+                  <h2 class="carrito">Shopping cart</h2>
+                  <form action="/orders/save" method="post">
                       <div class="tabla-carrito-container">
                           <table class="tabla-carrito">
                               <thead>
                                   <tr>
-                                      <th>Producto</th>
-                                      <th>Cantidad</th>
-                                      <th>Precio</th>
+                                      <th>Product</th>
+                                      <th>Quantity</th>
+                                      <th>Price</th>
                                       <th>Subtotal</th>
-                                      <th>Acción</th>
+                                      <th>Action</th>
                                   </tr>
                               </thead>
                               <tbody id="cart-items">
-                                  <%-- El JavaScript llenará esta tabla dinámicamente --%>
-                                  <tr><td colspan="5">El carrito está vacío</td></tr>
+
+                                  <tr><td colspan="5">Your cart is empty</td></tr>
                               </tbody>
                           </table>
                       </div>
@@ -116,17 +114,30 @@
                       <%-- Este div contendrá los inputs ocultos para enviar al servlet final --%>
                       <div id="hidden-form-inputs"></div>
 
-                      <button type="submit" class="btn-guardar-venta">Guardar Venta</button>
+                      <button type="submit" class="btn-save-order">SAVE ORDER</button>
+                      <div id="confirmation-order">
+
+                        <%
+                            String orderConfirmationMessage = (String) session.getAttribute("confirmation");
+                            if(orderConfirmationMessage != null){
+                         %>
+                            <p  style="color:red; margin:0; padding:0; text-align:center;"><%= orderConfirmationMessage %></p>
+                        <%
+                            }
+                        %>
+                      </div>
                   </form>
               </div>
     </div>
 
-    <script src="${pageContext.request.contextPath}/js/actualizarVistaCarrito.js"></script>
-    <script src="${pageContext.request.contextPath}/js/agregarAlCarrito.js"></script>
-    <script src="${pageContext.request.contextPath}/js/eliminarDelCarrito.js"></script>
-    <script>const carritoInicial = ${carritoInicial};</script>
+    <script src="${pageContext.request.contextPath}/js/clearOrderConfirmationMessage.js"></script>
+
+    <script src="${pageContext.request.contextPath}/js/updateCartView.js"></script>
+    <script src="${pageContext.request.contextPath}/js/addProductToCart.js"></script>
+    <script src="${pageContext.request.contextPath}/js/deleteProductFromCart.js"></script>
+    <script>const cart = ${cart}</script>
     <script src="${pageContext.request.contextPath}/js/index.js"></script>
-    <script src="${pageContext.request.contextPath}/js/carrito.js"></script>
+    <script src="${pageContext.request.contextPath}/js/cart.js"></script>
 
 
 

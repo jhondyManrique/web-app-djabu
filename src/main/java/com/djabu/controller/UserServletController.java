@@ -43,12 +43,12 @@ public class UserServletController extends HttpServlet {
                 userService.SignUpUser(userModel);
                 String successMessage = "your registration was success " + userModel.getFirstname();
                 request.setAttribute("Message",successMessage);
-                request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/view/userLogin.jsp").forward(request, response);
             }else {
                 request.setAttribute("errors", errors);
                 request.setAttribute("userModel", userModel);
                 request.setAttribute("errorMessage", "there are validation errors, please fix it and try again");
-                request.getRequestDispatcher("/WEB-INF/view/register.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/view/userRegister.jsp").forward(request, response);
                 System.out.println(errors);
             }
         } catch (SQLException e) {

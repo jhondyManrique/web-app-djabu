@@ -2,7 +2,6 @@ package com.djabu.dao;
 
 import com.djabu.model.ProductModel;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +13,9 @@ import static com.djabu.dao.Conexion.getConexion;
 
 public class ProductDAO {
 
+    public ProductDAO() {
+    }
+
     public List<ProductModel> getProducts(){
         List<ProductModel> products = new ArrayList<>();
         String sql = "SELECT * from products";
@@ -22,9 +24,9 @@ public class ProductDAO {
             ResultSet rs = pstm.executeQuery();){
 
             while (rs.next()){
-                String productName = rs.getString("product_name");
-                Double unitPrice = rs.getDouble("unit_price");
-                products.add(new ProductModel(productName,unitPrice));
+                String name = rs.getString("product_name");
+                Double price = rs.getDouble("unit_price");
+                products.add(new ProductModel(name,price));
             }
 
         } catch (SQLException e) {
@@ -58,8 +60,8 @@ public class ProductDAO {
         String sql = "INSERT INTO products (product_name,unit_price) VALUES (?,?)";
         try(Connection conn = getConexion();
             PreparedStatement  pstm = conn.prepareStatement(sql)){
-            pstm.setString(1,productModel.getProductName());
-            pstm.setDouble(2,productModel.getUnitPrice());
+            pstm.setString(1,productModel.getName());
+            pstm.setDouble(2,productModel.getPrice());
             afectedRows = pstm.executeUpdate();
         }catch (SQLException e){
             throw new RuntimeException(e);

@@ -9,7 +9,7 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css"/>
-    <title>Login</title>
+    <title>userLogin</title>
 </head>
 <body>
 
@@ -27,7 +27,7 @@
               String message = (String) request.getAttribute("Message");
               if(message != null){
               %>
-                    <p style="color:red; margin:0; padding:0; text-align:center;"><%= message %></p>
+                <p style="color:red; margin:0; padding:0; text-align:center;"><%= message %></p>
               <%
               }
               %>

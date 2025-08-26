@@ -1,32 +1,30 @@
 package com.djabu.model;
 
-import java.math.BigDecimal;
-
 public class ProductModel {
-    protected String productName;
-    protected double unitPrice;
+    protected String name;
+    protected double price;
 
     public ProductModel() {
     }
 
-    public ProductModel(String productName, Double unitPrice) {
-        this.productName = productName;
-        this.unitPrice = unitPrice;
+    public ProductModel(String name, Double price) {
+        this.name = name;
+        this.price = price;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Double getUnitPrice() {
-        return unitPrice;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setUnitPrice(Double unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

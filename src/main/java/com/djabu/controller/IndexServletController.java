@@ -1,5 +1,4 @@
 package com.djabu.controller;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +11,7 @@ import java.io.IOException;
 public class IndexServletController extends HttpServlet {
 
     @Override
+    //this method return
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Object user = request.getSession().getAttribute("user");
@@ -19,7 +19,7 @@ public class IndexServletController extends HttpServlet {
             response.sendRedirect("home");
             return;
         }
-        request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/userLogin.jsp").forward(request, response);
     }
 
 }

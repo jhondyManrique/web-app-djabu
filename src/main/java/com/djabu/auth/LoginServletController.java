@@ -28,7 +28,7 @@ public class LoginServletController extends HttpServlet {
             response.sendRedirect("home");
         }else {
             request.setAttribute("Message", "invalid credentials");
-            request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/userLogin.jsp").forward(request, response);
         }
 
     }
