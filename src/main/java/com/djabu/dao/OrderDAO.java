@@ -4,6 +4,7 @@ import com.djabu.model.OrderItemModel;
 import com.djabu.model.OrderModel;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,4 +82,37 @@ public class OrderDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public List<OrderModel> getOrdersByDate(LocalDate startDate, LocalDate endDate) {
+        List<OrderModel> orders = new ArrayList<>();
+        // Usamos CAST para comparar solo la parte de la fecha de nuestro TIMESTAMP
+        String sql = "SELECT * FROM orders WHERE CAST(order_date AS DATE) BETWEEN ? AND ?";
+
+        try (Connection conn = getConexion();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Asignamos los parámetros de fecha a la consulta y transformamos el tipo localdate
+            // a tipo sql.date que el jdbc si puede entender
+            pstmt.setDate(1, Date.valueOf(startDate));
+            pstmt.setDate(2, Date.valueOf(endDate));
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id_order");
+                Timestamp date  = rs.getTimestamp("order_date");
+                double total = rs.getDouble("total_price_order");
+                OrderModel order = new OrderModel();
+                order.setId(id);
+                order.setDate(date);
+                order.setTotal(total);
+                orders.add(order);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return orders;
+
+}
+
 }
