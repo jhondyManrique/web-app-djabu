@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -52,6 +52,15 @@
       </div>
       <div class="container_table">
         <h1 class="inv">ORDERS</h1>
+        <form action="/orders" method="GET">
+            <label for="startDate">From:</label>
+            <input type="date" id="startDate" name="startDate">
+
+            <label for="endDate">To:</label>
+            <input type="date" id="endDate" name="endDate">
+
+            <button type="submit">Filter</button>
+        </form>
         <table>
           <thead>
             <tr>
@@ -65,7 +74,7 @@
             <c:forEach var="order" items="${orders}">
                 <tr>
                     <td><c:out value="${order.id}" /></td>
-                    <td><c:out value="${order.date}" /></td>
+                    <td><fmt:formatDate value="${order.date}" pattern="dd/MM/yyyy" /></td>
                     <td><c:out value="${order.total}" /></td>
                     <td><a href="${pageContext.request.contextPath}/orders/details?id=${order.id}">
                         <button type="button" class="btn-order-details">VIEW DETAILS</button>
