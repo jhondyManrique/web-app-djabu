@@ -6,7 +6,7 @@ function addProductToCart(product) {
     params.append('price', product.price);
     params.append('quantity', product.quantity);
 
-    fetch('cart', {
+    fetch("/cart", {
         method: 'POST',
         body: params
     })

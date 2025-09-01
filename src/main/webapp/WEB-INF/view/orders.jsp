@@ -27,7 +27,7 @@
                   </div>
                   <ul class="menu">
                     <li>
-                      <a href="/home"><img src="${pageContext.request.contextPath}/assets/icons/inicio.jpg" alt="" />Home</a>
+                      <a href="/dashboard"><img src="${pageContext.request.contextPath}/assets/icons/inicio.jpg" alt="" />Home</a>
                     </li>
                     <li>
                       <a href=""><img src="${pageContext.request.contextPath}/assets/icons/perfil.jpg" alt="" />Profile</a>
@@ -91,6 +91,8 @@
             </c:if>
           </tbody>
         </table>
+         <a href="/orders/new-order"><button type="button" class="btn-new-order">NEW ORDER</button></a>
+
         <footer><h3>&copy copyright</h3></footer>
       </div>
     <script src="${pageContext.request.contextPath}/js/index.js"></script>

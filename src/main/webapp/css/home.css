@@ -58,6 +58,10 @@ button {
   border: none;
 }
 
+.btn-new-order {
+    margin-top: 10px;
+}
+
 button:hover {
   background-color: #13572f;
 }

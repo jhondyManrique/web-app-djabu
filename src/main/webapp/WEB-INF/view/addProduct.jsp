@@ -32,7 +32,7 @@
           <input type="text" id="unitPrice" name="unitPrice" />
 
           <button type="submit">ADD</button>
-          <a href="/home">
+          <a href="/dashboard">
             <button type="button">Go Home</button>
           </a>
         </form>

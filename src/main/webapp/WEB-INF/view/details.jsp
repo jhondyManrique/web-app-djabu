@@ -27,7 +27,7 @@
             </div>
             <ul class="menu">
                 <li>
-                    <a href="/home"><img src="${pageContext.request.contextPath}/assets/icons/inicio.jpg" alt="" />Home</a>
+                    <a href="/dashboard"><img src="${pageContext.request.contextPath}/assets/icons/inicio.jpg" alt="" />Home</a>
                 </li>
                 <li>
                     <a href=""><img src="${pageContext.request.contextPath}/assets/icons/perfil.jpg" alt="" />Profile</a>
