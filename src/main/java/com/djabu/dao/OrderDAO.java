@@ -112,6 +112,31 @@ public class OrderDAO {
         }
         return orders;
 
-}
+    }
+
+    public double getTodaysRevenue() {
+        // La consulta SQL suma la columna 'total' de las ventas donde la fecha
+        // (ignorando la hora) coincide con la fecha actual del servidor.
+        String sql = "SELECT SUM(total_price_order) AS todaysTotal FROM orders WHERE CAST(order_date AS DATE) = CURRENT_DATE;";
+        double todaysTotal = 0.0;
+
+        try (Connection conn = getConexion();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = pstmt.executeQuery();
+
+            // Nos movemos a la primera (y única) fila del resultado
+            if (rs.next()) {
+                // Obtenemos el valor de la suma. Si no hubo ventas, SUM(total) puede devolver NULL,
+                // por lo que getDouble lo convierte a 0.0
+                todaysTotal = rs.getDouble("todaysTotal");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return todaysTotal;
+    }
 
 }

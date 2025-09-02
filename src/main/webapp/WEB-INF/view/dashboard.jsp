@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +50,12 @@
 
                           </ul>
                         </nav>
+      </div>
+      <div class="stat-card">
+        <h2>Today s Revenue</h2>
+        <h3>
+          <fmt:formatNumber value="${todaysRevenue}" type="currency" currencySymbol="$" minFractionDigits="2" maxFractionDigits="2" />
+        </h3>
       </div>
     <script src="${pageContext.request.contextPath}/js/index.js"></script>
   </body>
