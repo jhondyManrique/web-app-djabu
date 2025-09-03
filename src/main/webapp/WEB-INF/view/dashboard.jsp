@@ -51,12 +51,30 @@
                           </ul>
                         </nav>
       </div>
-      <div class="stat-card">
-        <h2>Today s Revenue</h2>
-        <h3>
-          <fmt:formatNumber value="${todaysRevenue}" type="currency" currencySymbol="$" minFractionDigits="2" maxFractionDigits="2" />
-        </h3>
-      </div>
+      <div class="dashboard-grid">
+
+          <div class="stat-card">
+            <h2>Todays Revenue</h2>
+            <h3>
+              <fmt:formatNumber value="${todaysRevenue}" type="currency" currencySymbol="$" />
+            </h3>
+          </div>
+
+          <div class="stat-card">
+            <h2>Top Selling Product</h2>
+            <h3>
+              <c:out value="${topProduct}" />
+            </h3>
+          </div>
+
+          <div class="stat-card">
+            <h2>Todays Orders</h2>
+            <h3>
+              <c:out value="${todaysOrdersCount}" />
+            </h3>
+          </div>
+
+          </div>
     <script src="${pageContext.request.contextPath}/js/index.js"></script>
   </body>
 </html>
