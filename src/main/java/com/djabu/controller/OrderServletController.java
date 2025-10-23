@@ -24,7 +24,7 @@ public class OrderServletController extends HttpServlet {
         List<OrderModel> orders;
 
         if (startDateString != null && !startDateString.isEmpty() && endDateString != null && !endDateString.isEmpty()) {
-            // Si hay fechas, las convertimos y llamamos al método de filtrado
+            // Si hay fechas, las convertimos y llamamos al metodo de filtrado
             LocalDate startDate = LocalDate.parse(startDateString);
             LocalDate endDate = LocalDate.parse(endDateString);
             orders = orderDAO.getOrdersByDate(startDate,endDate);

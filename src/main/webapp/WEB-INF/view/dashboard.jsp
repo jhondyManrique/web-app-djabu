@@ -70,7 +70,27 @@
           <div class="stat-card">
             <h2>Todays Orders</h2>
             <h3>
-              <c:out value="${todaysOrdersCount}" />
+                <table class="table-card">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+              <c:forEach var="order" items="${todaysOrders}">
+                <tr>
+                    <td><c:out value="${order.id}" /></td>
+                    <td><c:out value="${order.total}" /></td>
+                </tr>
+                </c:forEach>
+                    <c:if test="${empty todaysOrders}">
+                        <tr>
+                            <td colspan="4" style="text-align:center; padding: 20px;">
+                                      There are no orders yet, add the first one!!
+                            </td>
+                        </tr>
+                    </c:if>
+                </table>
             </h3>
           </div>
 

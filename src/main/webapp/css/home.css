@@ -105,6 +105,10 @@ table {
   text-align: center;
 }
 
+.table-card {
+    width : 100%;
+}
+
 th,
 td {
   padding: 13px;
