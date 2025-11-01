@@ -6,19 +6,14 @@ import jakarta.servlet.annotation.WebListener;
 import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
 
+import javax.sql.DataSource;
+
 @WebListener
 public class FlywayMigrationListenerConfig implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        String URL = System.getenv("POSTGRESQL_JDBC_URL");
-        String USER = System.getenv("POSTGRESQL_JDBC_USER");
-        String PASSWORD = System.getenv("POSTGRESQL_JDBC_PASSWORD");
-
-        PGSimpleDataSource dataSource = new PGSimpleDataSource();
-        dataSource.setUrl(URL);
-        dataSource.setUser(USER);
-        dataSource.setPassword(PASSWORD);
+        DataSource dataSource = DatabaseConfig.getDataSource();
 
         Flyway flyway = Flyway.configure()
                 .dataSource(dataSource)
@@ -35,6 +30,8 @@ public class FlywayMigrationListenerConfig implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
+
+        DatabaseConfig.shutDown();
         System.out.println("Aplicación Djabu detenida. No se requiere limpieza de hilos de driver.");
     }
 
