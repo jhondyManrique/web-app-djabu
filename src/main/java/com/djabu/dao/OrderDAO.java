@@ -1,5 +1,6 @@
 package com.djabu.dao;
 
+import com.djabu.config.DatabaseConfig;
 import com.djabu.model.OrderItemModel;
 import com.djabu.model.OrderModel;
 import com.djabu.util.ConnectionManager;
@@ -120,7 +121,7 @@ public class OrderDAO {
         String sql = "SELECT SUM(total_price_order) AS todaysTotal FROM orders WHERE CAST(order_date AS DATE) = CURRENT_DATE;";
         double todaysTotal = 0.0;
 
-        try (Connection conn = getConexion();
+        try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             ResultSet rs = pstmt.executeQuery();
