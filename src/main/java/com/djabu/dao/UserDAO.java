@@ -1,11 +1,13 @@
 package com.djabu.dao;
 
 import com.djabu.model.UserModel;
+import com.djabu.util.ConnectionManager;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.djabu.dao.Conexion.getConexion;
+
 
 
 public class UserDAO {
@@ -16,7 +18,7 @@ public class UserDAO {
         String sql="SELECT * from users";
 
         try {
-            Connection conn = getConexion();
+            Connection conn = ConnectionManager.getConnection();
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery(sql);
 
@@ -43,7 +45,7 @@ public class UserDAO {
     public static UserModel getUserByEmail(String email){
         UserModel user = null;
         String sql = "SELECT * FROM users WHERE email = ?";
-        try(Connection conn = getConexion();
+        try(Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstm = conn.prepareStatement(sql);) {
             pstm.setString(1, email);
             ResultSet rs = pstm.executeQuery();
@@ -71,7 +73,7 @@ public class UserDAO {
         int afectedRows = 0;
         String sql = "INSERT INTO users (identification,firstname,lastname,phone,email,password) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = getConexion();
+        try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1, user.getIdentification());
@@ -93,7 +95,7 @@ public class UserDAO {
     public void UpdateUser(int id, String firstname, String lastname) {
         String sql = "UPDATE users SET firstname = ?, lastname = ? WHERE id = ?";
 
-        try (Connection conn = getConexion();
+        try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, firstname);
@@ -111,7 +113,7 @@ public class UserDAO {
     public boolean DeleteUser(int id) {
         String sql = "DELETE FROM users WHERE id = ?";
 
-        try (Connection conn = getConexion();
+        try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
@@ -128,7 +130,7 @@ public class UserDAO {
 
     public boolean validateUserByIdentificationOrEmail(String identification, String email) throws SQLException {
         String sql = "SELECT * FROM users WHERE identification = ? OR email = ?";
-        try (Connection conn = getConexion();
+        try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setString(1,identification);
             stmt.setString(2,email);
