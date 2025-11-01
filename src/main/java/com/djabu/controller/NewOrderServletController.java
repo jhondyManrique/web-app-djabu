@@ -17,8 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/home")
-public class HomeServletController extends HttpServlet {
+@WebServlet("/orders/new-order")
+public class NewOrderServletController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,7 +40,7 @@ public class HomeServletController extends HttpServlet {
         products = productDAO.getProducts();
         if (products != null){
             request.setAttribute("products", products );
-            request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/newOrder.jsp").forward(request, response);
         }
 
     }

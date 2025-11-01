@@ -25,7 +25,7 @@ public class LoginServletController extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user.getFirstname());
-            response.sendRedirect("home");
+            response.sendRedirect("dashboard");
         }else {
             request.setAttribute("Message", "invalid credentials");
             request.getRequestDispatcher("/WEB-INF/view/userLogin.jsp").forward(request, response);

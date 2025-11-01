@@ -16,7 +16,7 @@ public class IndexServletController extends HttpServlet {
             throws ServletException, IOException {
         Object user = request.getSession().getAttribute("user");
         if(user != null){
-            response.sendRedirect("home");
+            response.sendRedirect("dashboard");
             return;
         }
         request.getRequestDispatcher("/WEB-INF/view/userLogin.jsp").forward(request, response);

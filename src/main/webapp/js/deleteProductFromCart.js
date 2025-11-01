@@ -4,7 +4,7 @@ function deleteProductFromCart(productName) {
     params.append('action', 'deleteProduct');
     params.append('name', productName);
 
-    fetch('cart', {
+    fetch("/cart", {
         method: 'POST',
         body: params
     })

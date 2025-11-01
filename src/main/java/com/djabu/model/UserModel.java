@@ -1,6 +1,7 @@
 package com.djabu.model;
 
-public class UserModel {
+public class
+UserModel {
     protected String identification;
     protected String firstname;
     protected String lastname;

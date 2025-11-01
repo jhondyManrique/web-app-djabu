@@ -6,7 +6,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>new Order</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css" />
   </head>
   <body>
@@ -27,7 +27,7 @@
                           </div>
                           <ul class="menu">
                             <li>
-                              <a href="/home"><img src="${pageContext.request.contextPath}/assets/icons/inicio.jpg" alt="" />Home</a>
+                              <a href="/dashboard"><img src="${pageContext.request.contextPath}/assets/icons/inicio.jpg" alt="" />Home</a>
                             </li>
                             <li>
                               <a href=""><img src="${pageContext.request.contextPath}/assets/icons/perfil.jpg" alt="" />Profile</a>
@@ -131,7 +131,9 @@
     </div>
 
     <script src="${pageContext.request.contextPath}/js/clearOrderConfirmationMessage.js"></script>
-
+    <script>
+        const cartUrl = '${pageContext.request.contextPath}/cart';
+    </script>
     <script src="${pageContext.request.contextPath}/js/updateCartView.js"></script>
     <script src="${pageContext.request.contextPath}/js/addProductToCart.js"></script>
     <script src="${pageContext.request.contextPath}/js/deleteProductFromCart.js"></script>
